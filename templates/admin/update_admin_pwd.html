@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改密码</title>
+    <link href="../../static/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="panel panel-default main" id="main">
+            <div class="panel-heading text-center">修改密码</div>
+                <div id="changePasswordForm">
+                <form id="passwordForm" method="post">
+                    <div class="form-group">
+                        <label for="oldPassword">原密码:</label>
+                        <input type="password" class="form-control" id="oldPassword" name="oldPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">新密码:</label>
+                        <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                    </div>
+                    <button type="submit" id="submitPasswordBtn" class="btn btn-primary">提交</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的课程</title>
+    <link href="../../static/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+
+        <div class="panel panel-default main" id="main">
+
+            <div class="panel-heading text-center">我的课程</div>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">编号</th>
+                        <th scope="col">课程名称</th>
+                        <th scope="col">上课时间</th>
+                        <th scope="col">上课地点</th>
+                        <th scope="col">学生详情</th>
+                        <th scope="col">考勤情况</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for course in courses %}
+                        <tr>
+                            <td scope="col">{{ course.id }}</td>
+                            <td scope="col">{{ course.name }}</td>
+                            <td scope="col">星期{{ course.week }} {{ course.time }}</td>
+                            <td scope="col">{{ course.address }}</td>
+                            <td scope="col">
+                                <a href="{{ url_for('tch.my_student', cid=course.id) }}">学生详情</a>
+                            </td>
+                            <td scope="col">
+                                <a href="{{ url_for('tch.stu_attend', cid=course.id) }}">学生考勤</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

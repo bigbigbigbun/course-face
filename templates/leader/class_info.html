@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>班级信息</title>
+    <!-- 引入Bootstrap CSS -->
+    <link href="../../static/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+
+        <div class="panel panel-default main" id="main">
+
+            <div class="panel-heading text-center">班级信息</div>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>班级名称</th>
+                        <th>班级人数</th>
+                        <th>学生详情</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for class in classes %}
+                        <tr>
+                            <td>{{ class.id }}</td>
+                            <td>{{ class.name }}</td>
+                            <td>{{ class.stu_count }}</td>
+                            <td>
+                                <a href="{{ url_for('leader.class_student', class_id=class.id) }}">学生详情</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

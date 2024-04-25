@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../../static/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <title>学生签到</title>
+</head>
+<body>
+
+    <div class="container-fluid text-center">
+        <div id="contentHolder" class="text-center col-md-6">
+            <video id="video" autoplay></video>
+            <canvas style="display:none;" id="canvas"></canvas>
+	    </div>
+        <div class="form-group col-md-3">
+            <label for="class_id"><h2>签到课程:</h2></label>
+            <select class="form-control text-center" id="c_id" name="c_id" required>
+                {% for course in courses %}
+                    <option class="text-center" value="{{ course.id }}">{{ course.name }}</option>
+                {% endfor %}
+            </select><br><br><br><br><br><br>
+            <button type="button" class="btn btn-primary btn-lg" id="btn_snap" onclick="takePhoto()">签到</button>
+        </div>
+
+    </div>
+    <script src="../../static/js/jquery.min.js?v=2.1.4"></script>
+    <script src="../../static/js/bootstrap.min.js?v=3.3.6"></script>
+    <script>
+        const cvs = document.getElementById('canvas')
+        const video = document.getElementById('video')
+        cvs.width = cvs.height = video.width = video.height = 400
+        const {width, height} = cvs
+		const ctx = cvs.getContext('2d')
+
+        const constraints = {
+            video: {
+                width,
+                height
+            }
+        }
+        navigator.mediaDevices.getUserMedia({
+			video: {
+                width,
+                height
+            }
+		}).then((stream) => {
+			video.srcObject = stream
+			video.onloadedmetadata = () => video.play()
+		})
+        function takePhoto() {
+            const selectedCourseId = document.getElementById('c_id').value;
+            ctx.drawImage(video, 0, 0, width, height);
+            const imageBlob = canvas.toBlob((blob) => {
+                const formData = new FormData();
+                formData.append('image', blob, 'image.png');
+                formData.append('c_id', selectedCourseId)
+
+                fetch('/stu_sign_in/', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.msg) // 处理后端返回的数据
+                    window.location.href = '/stu_info/';
+                })
+                .catch(error => {
+                    alert(data.msg)
+                });
+            }, 'image/png');
+        };
+
+    </script>
+</body>
+</html>

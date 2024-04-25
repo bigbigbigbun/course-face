@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学生人脸信息</title>
+    <!-- 引入Bootstrap CSS -->
+    <link href="../../static/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+
+        <div class="panel panel-default main" id="main">
+
+            <div class="panel-heading text-center">学生人脸信息</div>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>学号</th>
+                        <th>学生姓名</th>
+                        <th>是否录入</th>
+                        <th>删除</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for face in faces %}
+                        <tr>
+                            <td>{{ face.id }}</td>
+                            <td>{{ face.s_id }}</td>
+                            <td>{{ face.students.name }}</td>
+                            <td>{{ face.result }}</td>
+                            <td>
+                                {% if face.result == '是' %}
+                                	<a href="" id="{{ face.id }}">删除</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="../../static/js/jquery.js"></script>
+    <script>
+        //是否确认删除
+        $(function () {
+            $("#main table tbody tr td a").click(function () {
+                var that = $(this);
+                var id = that.attr("id")
+                if (event.srcElement.outerText === '删除') {
+                    if (window.confirm("此操作不可逆，是否确认？")){
+                        //Ajax请求：前后端分离
+                        // 选课
+                        $.post('/admin/delface/', {id: id}, function (data) {
+                            if (data.code == 200) {
+                                alert(data.msg)
+                                location.reload()
+                            }
+                            else {
+                                alert(data.msg)
+                                location.reload()
+                            }
+                        })
+                    }
+                }
+            })
+        });
+    </script>
+</body>
+</html>

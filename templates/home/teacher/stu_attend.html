@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学生考勤</title>
+    <link href="../../static/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container-fluid">
+
+        <div class="panel panel-default main" id="main">
+
+            <div class="panel-heading text-center">课程考勤</div>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">编号</th>
+                        <th scope="col">学号</th>
+                        <th scope="col">学生姓名</th>
+                        <th scope="col">课程名称</th>
+                        <th scope="col">签到时间</th>
+                        <th scope="col">是否签到</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for attend in attends %}
+                        <tr>
+                            <td scope="col">{{ attend.id }}</td>
+                            <td scope="col">{{ attend.s_id }}</td>
+                            <td scope="col">{{ attend.student_name }}</td>
+                            <td scope="col">{{ courses.name }}</td>
+                            <td scope="col">{{ attend.time }}</td>
+                            <td scope="col">{{ attend.result }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

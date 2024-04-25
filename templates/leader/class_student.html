@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>班级学生信息</title>
+    <!-- 引入Bootstrap CSS -->
+    <link href="../../static/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+
+        <div class="panel panel-default main" id="main">
+
+            <div class="panel-heading text-center">班级学生信息</div>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>学号</th>
+                        <th>学生姓名</th>
+                        <th>学生性别</th>
+                        <th>学生密码</th>
+                        <th>学生班级</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                        <tr>
+                            <td>{{ student.id }}</td>
+                            <td>{{ student.name }}</td>
+                            <td>{% if student.sex %}
+                                    男
+                                {% else %}
+                                    女
+                                {% endif %} </td>
+                            <td>{{ student.pwd }}</td>
+                            <td>{{ student.class.name }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

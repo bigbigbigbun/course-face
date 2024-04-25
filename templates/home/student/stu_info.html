@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学生信息</title>
+    <link href="../../static/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="../../static/css/animate.min.css" rel="stylesheet">
+    <link href="../../static/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <h1 class="text-center">个人信息</h1>
+        <div class="row">
+            <div class="col-md-6 text-center">
+                <h2>学号:{{ user.id }}</h2>
+            </div>
+            <div class="col-md-6 text-center">
+                <h2>姓名:{{ user.name }}</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 text-center">
+                <h2>性别:
+                    {% if user.sex == True %}
+                        男
+                    {% else %}
+                        女
+                    {% endif %}
+                </h2>
+            </div>
+            <div class="col-md-6 text-center">
+                <h2>班级:{{ user.class.name }}</h2>
+            </div>
+        </div>
+        <br><br><br>
+        <div id="changePasswordForm">
+            <form action="/stu_pwd/" id="passwordForm" method="post">
+                <div class="form-group" style="width:500px">
+                    <label for="oldPassword">原密码:</label>
+                    <input type="password" class="form-control" id="oldPassword" name="oldPassword" required>
+                </div>
+                <div class="form-group" style="width:500px">
+                    <label for="newPassword">新密码:</label>
+                    <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                </div>
+                <button type="submit" id="submitPasswordBtn" class="btn btn-primary">提交</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

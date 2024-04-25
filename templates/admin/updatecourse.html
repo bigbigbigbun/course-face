@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>修改课程信息</title>
+    <!-- 引入Bootstrap CSS -->
+    <link href="../../static/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>修改课程信息</h2>
+        <form id="dataForm" method="post" action=""> <!-- 替换action为实际的提交地址 -->
+            <div class="form-group">
+               <label for="name">课程名称:</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ course.name }}" required>
+            </div>
+            <div class="form-group">
+                <label for="t_id">上课星期:</label>
+                <select class="form-control" id="week" name="week" required>
+                        <option value="1">周一</option>
+                        <option value="2">周二</option>
+                        <option value="3">周三</option>
+                        <option value="4">周四</option>
+                        <option value="5">周五</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="t_id">上课时间:</label>
+                <select class="form-control" id="time" name="time" required>
+                    	<option value="8:30:00">8:30</option>
+                    	<option value="10:00:00">10:00</option>
+                    	<option value="14:30:00">14:30</option>
+                    	<option value="16:00:00">16:00</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="address">请输入上课地点:</label>
+                <input type="text" class="form-control" id="times" name="address" value="{{ course.address }}" required>
+            </div>
+            <div class="form-group">
+                <label for="t_id">任课教师:</label>
+                <select class="form-control" id="t_id" name="t_id" required>
+                    {% for teacher in teachers %}
+                    	<option value="{{ teacher.id }}">{{ teacher.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">提交</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的课程页面</title>
+    <link href="../../static/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container-fluid">
+
+        <div class="panel panel-default main" id="main">
+
+            <div class="panel-heading text-center">我的课程</div>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">课程名称</th>
+                        <th scope="col">上课时间</th>
+                        <th scope="col">上课地点</th>
+                        <th scope="col">任课老师</th>
+                        <th scope="col">退课</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for course in courses %}
+                        <tr>
+                            <td scope="col">{{ course.name }}</td>
+                            <td>星期{{ course.week}} {{ course.time }}</td>
+                            <td scope="col">{{ course.address }}</td>
+                            <td scope="col">{{ course.teachers.name }}</td>
+                            <td scope="col">
+                                <a href="" cid="{{ course.id }}">退课</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="../../static/js/jquery.js"></script>
+    <script>
+        //是否确认删除
+        $(function () {
+            $("#main table tbody tr td a").click(function () {
+                var that = $(this);
+                var id = that.attr("cid")
+                if (event.srcElement.outerText === '退课') {
+                    if (window.confirm("此操作不可逆，是否确认？")){
+                        //Ajax请求：前后端分离
+                        // 选课
+                        $.post('/del_select_course/', {id: id}, function (data) {
+                            if (data.code == 200) {
+                                alert(data.msg)
+                                location.reload()
+                            }
+                            else {
+                                alert(data.msg)
+                                location.reload()
+                            }
+                        })
+                    }
+                }
+            })
+        });
+    </script>
+</body>
+</html>

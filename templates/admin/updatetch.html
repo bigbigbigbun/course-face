@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>修改教师信息</title>
+    <!-- 引入Bootstrap CSS -->
+    <link href="../../static/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>修改教师信息</h2>
+        <form id="dataForm" method="post" action=""> <!-- 替换action为实际的提交地址 -->
+            <div class="form-group">
+                <label for="name">教师姓名:</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ teacher.name }}" required>
+            </div>
+            <div class="form-group">
+                <label for="t_id">教师性别:</label>
+                <select class="form-control" id="sex" name="sex" required>
+                    <option value="1">男</option>
+                    <option value="0">女</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="address">教师密码:</label>
+                <input type="text" class="form-control" id="pwd" name="pwd" value="{{ teacher.pwd }}" required>
+            </div>
+            <div class="form-group">
+                <label for="t_id">教师班级:</label>
+                <select class="form-control" id="class_id" name="class_id" required>
+                    {% for class in classes %}
+                    	<option value="{{ class.id }}">{{ class.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">提交</button>
+        </form>
+    </div>
+</body>
+</html>
